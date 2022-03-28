@@ -1,0 +1,2 @@
+pandas==1.3.5
+jsoncomment==0.4.2
