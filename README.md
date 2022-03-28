@@ -72,3 +72,42 @@ Utiliser un framework de traitement en parallèle afin d'améliorer les performa
 Conteneuriser le code via Docker et utiliser Kubernetes afin d'automatiser la scalabilité
 
 Plus globalement, utiliser des services serverless sur le cloud pour assurer la scalabilité
+
+II) SQL
+
+2. Première partie du test
+```
+SELECT
+    date,
+    SUM(prod_price * prod_qty) AS ventes
+FROM
+    transaction
+WHERE
+    date BETWEEN "2019-01-01"AND "2019-12-31"
+GROUP BY
+    date
+ORDER BY
+    date ASC
+```
+
+3. Seconde partie du test
+```
+SELECT
+  client_id,
+  SUM(CASE
+      WHEN product.product_type = "MEUBLE" THEN prod_price * prod_qty
+  END) AS ventes_meuble,
+  SUM(CASE
+      WHEN product.product_type = "DECO" THEN prod_price * prod_qty
+  END) AS ventes_deco,
+FROM
+  transaction
+JOIN
+  product_nomenclature AS product
+ON
+  transaction.prod_id=product.product_id
+WHERE
+  date BETWEEN "2019-01-01" AND "2019-12-31"
+GROUP BY
+  client_id
+```
