@@ -4,8 +4,7 @@ SELECT
 FROM
   transaction
 WHERE
-  date BETWEEN "2019-01-01"
-  AND "2019-12-31"
+  date BETWEEN "2019-01-01"AND "2019-12-31"
 GROUP BY
   date
 ORDER BY
