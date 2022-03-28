@@ -7,15 +7,19 @@ import pandas as pd
 def read_csv(filepath):
     return pd.read_csv(filepath)
 
+
 def read_json_to_df(filepath):
     with open(filepath) as data_file:
-        parser = JsonComment(json) #handle trailing comma in json
+        parser = JsonComment(json)  # handle trailing comma in json
         data = parser.load(data_file)
     return pd.DataFrame(data)
 
+
 def delete_chars(df):
     df = df.applymap(lambda s: s.replace("\\xc3\\xb1", "") if type(s) == str else s)
-    return df.applymap(lambda s: s.replace("\\xc3\\x28", "") if type(s) == str else s)
+    df = df.applymap(lambda s: s.replace("\\xc3\\x28", "") if type(s) == str else s)
+    return df
+
 
 def lower_df(df):
     return df.applymap(lambda s: s.lower() if type(s) == str else s)
